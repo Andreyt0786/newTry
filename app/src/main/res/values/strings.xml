@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RecycleView</string>
+    <string name="description_flag">description flag</string>
+</resources>
