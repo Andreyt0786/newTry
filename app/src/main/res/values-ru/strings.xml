@@ -2,4 +2,15 @@
 <resources>
     <string name="app_name">RecycleView</string>
     <string name="description_flag">флаг страны</string>
+    <string name="menu_edit">Редактировать</string>
+    <string name="menu_remove">Удалить</string>
+    <string name="description_post_menu">Кнопка меню</string>
+    <string name="name_user">Имя контакта</string>
+    <string name="surname_user">Фамилия контакта</string>
+    <string name="telephone_user">Телефон контакта</string>
+    <string name="add_contact">Добавить контакт</string>
+    <string name="enter_name">Введите имя</string>
+    <string name="enter_surname">Введите фамилию</string>
+    <string name="enter_telephone">Введите номер</string>
+    <string name="add_user">Добавить пользователя</string>
 </resources>

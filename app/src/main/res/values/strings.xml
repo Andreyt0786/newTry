@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">RecycleView</string>
     <string name="description_flag">description flag</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_remove">Remove</string>
+    <string name="description_post_menu">Post menu</string>
+    <string name="name_user">name user</string>
+    <string name="surname_user">surname user</string>
+    <string name="telephone_user">telephone user</string>
+    <string name="add_contact">add contact</string>
+    <string name="enter_name">Enter name</string>
+    <string name="enter_surname">Enter surname</string>
+    <string name="enter_telephone">Enter number</string>
+    <string name="add_user">Add user</string>
 </resources>
