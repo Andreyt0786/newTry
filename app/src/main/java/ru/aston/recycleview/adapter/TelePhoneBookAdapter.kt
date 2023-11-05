@@ -14,6 +14,9 @@ import ru.aston.recycleview.dto.TelePhoneBook
 interface OnInteractionListener {
     fun onEdit(telePhoneBook: TelePhoneBook) {}
     fun onRemove(telePhoneBook: TelePhoneBook) {}
+    fun onCheck(telePhoneBook: TelePhoneBook) {}
+
+
 }
 
 class TelePhoneBookDiffCallback : DiffUtil.ItemCallback<TelePhoneBook>() {
@@ -53,6 +56,7 @@ class TelePhoneBookViewHolder(
             contactName.text = telePhoneBook.name
             contactSurname.text = telePhoneBook.surName
             telephoneUser.text = telePhoneBook.number
+            check.isChecked = telePhoneBook.isChecked
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
@@ -75,7 +79,9 @@ class TelePhoneBookViewHolder(
                 }.show()
             }
 
-
+            check.setOnClickListener {
+                onInteractionListener.onCheck(telePhoneBook)
+            }
         }
     }
 

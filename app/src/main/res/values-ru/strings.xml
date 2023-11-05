@@ -14,4 +14,5 @@
     <string name="enter_telephone">Введите номер</string>
     <string name="add_user">Добавить пользователя</string>
     <string name="need_to_feel">Необходимо заполнить все поля</string>
+    <string name="add_check">add check</string>
 </resources>

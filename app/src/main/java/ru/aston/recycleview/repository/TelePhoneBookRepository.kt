@@ -8,4 +8,6 @@ interface TelePhoneBookRepository {
     fun getAll(): LiveData<List<TelePhoneBook>>
     fun save(telePhoneBook: TelePhoneBook)
     fun removeById(id: Int)
+
+    fun check(id:Int)
 }

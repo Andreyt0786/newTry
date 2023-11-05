@@ -18,6 +18,10 @@ class TelePhoneBookViewModel(application: Application):AndroidViewModel(applicat
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
 
+
+    fun check(id:Int){
+        repository.check(id)
+    }
     fun save() {
         edited.value?.let {
             repository.save(it)

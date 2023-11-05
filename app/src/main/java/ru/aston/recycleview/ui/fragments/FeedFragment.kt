@@ -1,6 +1,7 @@
 package ru.aston.recycleview.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,8 @@ class FeedFragment : Fragment() {
 
         val bundle =  Bundle()
 
+        var list:MutableSet<Int> = mutableSetOf()
+
         val adapter = TelePhoneBookAdapter(object : OnInteractionListener {
             override fun onEdit(telePhoneBook: TelePhoneBook) {
                 viewModel.edit(telePhoneBook)
@@ -39,6 +42,19 @@ class FeedFragment : Fragment() {
 
             override fun onRemove(telePhoneBook: TelePhoneBook) {
                 viewModel.removeById(telePhoneBook.id)
+            }
+
+
+            override fun onCheck(telePhoneBook: TelePhoneBook) {
+                if(!telePhoneBook.isChecked){
+                    list.add(telePhoneBook.id)
+                    Log.d("CHECK","Add id = $telePhoneBook.id")
+                } else{
+                    list.remove(telePhoneBook.id)
+                    Log.d("CHECK","Remove id = $telePhoneBook.id")
+                }
+
+                viewModel.check(telePhoneBook.id)
             }
         })
         binding.list.adapter = adapter
@@ -58,6 +74,15 @@ class FeedFragment : Fragment() {
 
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
+        }
+
+
+        binding.delete.setOnClickListener {
+            for(s in list){
+                viewModel.removeById(s)
+                Log.d("CHECK","Delete id = $s")
+            }
+            list.clear()
         }
 
         return binding.root

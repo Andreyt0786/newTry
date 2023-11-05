@@ -65,7 +65,8 @@ class TelePhoneRepositoryImpl() : TelePhoneBookRepository {
             if (it.id != telePhoneBook.id) it else it.copy(
                 name = telePhoneBook.name,
                 surName = telePhoneBook.surName,
-                number = telePhoneBook.number,)
+                number = telePhoneBook.number,
+            )
         }
         data.value = telePhoneBooks
 
@@ -73,6 +74,15 @@ class TelePhoneRepositoryImpl() : TelePhoneBookRepository {
 
     override fun removeById(id: Int) {
         telePhoneBooks = telePhoneBooks.filter { it.id != id }
+        data.value = telePhoneBooks
+    }
+
+    override fun check(id: Int) {
+        telePhoneBooks = telePhoneBooks.map {
+            if(it.id != id) it else it.copy(
+                isChecked = !it.isChecked
+            )
+        }
         data.value = telePhoneBooks
     }
 }
