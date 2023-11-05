@@ -52,7 +52,7 @@ class FeedFragment : Fragment() {
             }
             val list = arrayListOf<String>(telePhoneBook.name,telePhoneBook.surName,telePhoneBook.number)
             bundle.putStringArrayList("parametrs",list)
-            findNavController().navigate(R.id.action_feedFragment_to_newPostFragment,
+            findNavController().navigate(R.id.action_feedFragment_to_changePostFragment,
                bundle)
         }
 

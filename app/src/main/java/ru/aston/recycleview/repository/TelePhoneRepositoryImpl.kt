@@ -4,38 +4,39 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.aston.recycleview.dto.TelePhoneBook
 
+@Suppress("UNUSED_CHANGED_VALUE")
 class TelePhoneRepositoryImpl() : TelePhoneBookRepository {
-    private var nextId = 1
+
 
     private var telePhoneBooks = listOf(
         TelePhoneBook(
-            id = nextId++,
+            id = 1,
             name = "Катя",
             surName = "Иванова",
             number = "78889992255"
 
         ),
         TelePhoneBook(
-            id = nextId++,
+            id = 2,
             name = "Петя",
             surName = "Швецов",
             number = "78889992233"
 
         ),
         TelePhoneBook(
-            id = nextId++,
+            id = 3,
             name = "Оля",
             surName = "Петрова",
             number = "78889997799"
         ),
         TelePhoneBook(
-            id = nextId++,
+            id = 4,
             name = "Сергей",
             surName = "Полунин",
             number = "78889997766"
         ),
         TelePhoneBook(
-            id = nextId++,
+            id = 5,
             name = "Маша",
             surName = "Ким",
             number = "78889997711"
@@ -46,6 +47,7 @@ class TelePhoneRepositoryImpl() : TelePhoneBookRepository {
     override fun getAll(): LiveData<List<TelePhoneBook>> = data
 
     override fun save(telePhoneBook: TelePhoneBook) {
+        var nextId = telePhoneBooks.size
         if (telePhoneBook.id == 0) {
 
             telePhoneBooks = listOf(

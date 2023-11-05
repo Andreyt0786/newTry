@@ -11,7 +11,14 @@
         android:label="FeedFragment" >
         <action
             android:id="@+id/action_feedFragment_to_newPostFragment"
-            app:destination="@id/newPostFragment" />
+            app:destination="@id/newPostFragment"
+            app:popUpTo="@id/newPostFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_feedFragment_to_changePostFragment"
+            app:destination="@id/changePostFragment"
+            app:popUpTo="@id/changePostFragment"
+            app:popUpToInclusive="true"/>/>
     </fragment>
     <fragment
         android:id="@+id/newPostFragment"
@@ -20,6 +27,18 @@
         tools:layout="@layout/fragment_new_post" >
         <action
             android:id="@+id/action_newPostFragment_to_feedFragment"
-            app:destination="@id/feedFragment" />
+            app:destination="@id/feedFragment"
+            app:popUpTo="@id/feedFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/changePostFragment"
+        android:name="ru.aston.recycleview.ui.fragments.ChangePostFragment"
+        android:label="ChangePostFragment" >
+        <action
+            android:id="@+id/action_changePostFragment_to_feedFragment"
+            app:destination="@id/feedFragment"
+            app:popUpTo="@id/feedFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

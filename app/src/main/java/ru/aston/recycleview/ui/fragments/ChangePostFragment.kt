@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,7 +14,7 @@ import ru.aston.recycleview.util.AndroidUtils
 import ru.aston.recycleview.util.StringArg
 import ru.aston.recycleview.viewModel.TelePhoneBookViewModel
 
-class NewPostFragment : Fragment() {
+class ChangePostFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,28 +31,19 @@ class NewPostFragment : Fragment() {
             ownerProducer = ::requireParentFragment
         )
 
+        arguments?.getStringArrayList("parametrs")!![0]?.let(binding.nameUser::setText)
+        arguments?.getStringArrayList("parametrs")!![2]?.let(binding.telephoneUser::setText)
+        arguments?.getStringArrayList("parametrs")!![1]?.let(binding.surnameUser::setText)
 
         binding.fab.setOnClickListener {
-            if (binding.nameUser.text.toString().isNotEmpty() &&
-                binding.surnameUser.text.toString().isNotEmpty() &&
-                binding.telephoneUser.text.toString().isNotEmpty()
-            ) {
-                viewModel.change(
-                    binding.nameUser.text.toString(),
-                    binding.surnameUser.text.toString(),
-                    binding.telephoneUser.text.toString(),
-                )
-                viewModel.save()
-                AndroidUtils.hideKeyboard(requireView())
-                findNavController().navigate(R.id.action_newPostFragment_to_feedFragment)
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    R.string.need_to_feel,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-            }
+            viewModel.change(
+                binding.nameUser.text.toString(),
+                binding.surnameUser.text.toString(),
+                binding.telephoneUser.text.toString(),
+            )
+            viewModel.save()
+            AndroidUtils.hideKeyboard(requireView())
+            findNavController().navigate(R.id.action_changePostFragment_to_feedFragment)
         }
         return binding.root
     }
