@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.FirstFragment">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Фрагмент B"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Фрагмент B" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttom_A"
+        style="Widget.AppTheme.PlayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:layout_marginTop="@dimen/common_spacing"
+        app:layout_constraintTop_toBottomOf="@id/text"
+        tools:text="На фрагмент A"
+        android:text="На фрагмент A"
+
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttom_C"
+        style="Widget.AppTheme.PlayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     android:layout_marginRight="@dimen/common_spacing"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/common_spacing"
+        app:layout_constraintTop_toBottomOf="@id/text"
+        tools:text="На фрагмент C"
+        android:text="На фрагмент C"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
