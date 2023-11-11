@@ -43,11 +43,13 @@ class TelePhoneRepositoryImpl() : TelePhoneBookRepository {
         ),
 
         )
+
+    var nextId = telePhoneBooks.size + 1
     private val data = MutableLiveData(telePhoneBooks)
     override fun getAll(): LiveData<List<TelePhoneBook>> = data
 
     override fun save(telePhoneBook: TelePhoneBook) {
-        var nextId = telePhoneBooks.size
+
         if (telePhoneBook.id == 0) {
 
             telePhoneBooks = listOf(
@@ -79,7 +81,7 @@ class TelePhoneRepositoryImpl() : TelePhoneBookRepository {
 
     override fun check(id: Int) {
         telePhoneBooks = telePhoneBooks.map {
-            if(it.id != id) it else it.copy(
+            if (it.id != id) it else it.copy(
                 isChecked = !it.isChecked
             )
         }
