@@ -23,9 +23,9 @@ class FourthFragment: Fragment()  {
             false
         )
 
-
+        val fragment = SecondFragment()
         binding.buttomB.setOnClickListener {
-            val fragment = SecondFragment()
+
 
             fragmentManager?.beginTransaction()?.run {
                 replace(R.id.nav_container, fragment)

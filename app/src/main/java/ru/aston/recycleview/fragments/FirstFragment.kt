@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import ru.aston.recycleview.R
 import ru.aston.recycleview.databinding.FragmentFirstBinding
 
-@Suppress("DEPRECATION")
+
 class FirstFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,13 +20,14 @@ class FirstFragment : Fragment() {
             container,
             false
         )
+        val fragment = SecondFragment()
         binding.buttom.setOnClickListener {
-            val fragment = SecondFragment()
-            fragmentManager?.beginTransaction()?.run {
-                replace(R.id.nav_container, fragment)
-                addToBackStack("first fragment")
-                commit()
-            }
+
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.nav_container, fragment)
+                .addToBackStack("first fragment")
+                .commit()
+
         }
         return binding.root
     }
