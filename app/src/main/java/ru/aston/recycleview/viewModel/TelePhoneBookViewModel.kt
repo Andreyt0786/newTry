@@ -33,13 +33,13 @@ class TelePhoneBookViewModel(application: Application):AndroidViewModel(applicat
         edited.value = telePhoneBook
     }
 
-    fun change(name: String, surname:String, number:String) {
+    fun change(id:Int, name: String, surname:String, number:String) {
         val textName = name.trim()
         val textSurName = surname.trim()
         if (edited.value?.name == textName && edited.value?.name == textSurName) {
             return
         }
-        edited.value = edited.value?.copy(name = textName, surName = textSurName, number = number)
+        edited.value = edited.value?.copy(id = id,name = textName, surName = textSurName, number = number)
     }
 
 

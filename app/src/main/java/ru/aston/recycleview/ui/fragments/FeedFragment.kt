@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import ru.aston.recycleview.R
 import ru.aston.recycleview.adapter.OnInteractionListener
 import ru.aston.recycleview.adapter.TelePhoneBookAdapter
@@ -16,9 +16,26 @@ import ru.aston.recycleview.dto.TelePhoneBook
 import ru.aston.recycleview.viewModel.TelePhoneBookViewModel
 
 class FeedFragment : Fragment() {
-    private val viewModel: TelePhoneBookViewModel by viewModels(
-        ownerProducer = ::requireParentFragment
-    )
+    private val viewModel: TelePhoneBookViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Use the Kotlin extension in the fragment-ktx artifact.
+        setFragmentResultListener("key") { _, bundle ->
+            // We use a String here, but any type that can be put in a Bundle is supported.
+            val data = bundle.getSerializable("result key")
+            // Do something with the result.
+            if (data is TelePhoneBook) {
+                viewModel.change(
+                    data.id,
+                    data.name,
+                    data.surName,
+                    data.number
+                )
+                viewModel.save()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,9 +48,11 @@ class FeedFragment : Fragment() {
             false
         )
 
-        val bundle =  Bundle()
+        val newFragment = NewPostFragment()
+        val changeFragment = ChangePostFragment()
+        val bundle = Bundle()
 
-        var list:MutableSet<Int> = mutableSetOf()
+        val list: MutableSet<Int> = mutableSetOf()
 
         val adapter = TelePhoneBookAdapter(object : OnInteractionListener {
             override fun onEdit(telePhoneBook: TelePhoneBook) {
@@ -46,12 +65,12 @@ class FeedFragment : Fragment() {
 
 
             override fun onCheck(telePhoneBook: TelePhoneBook) {
-                if(!telePhoneBook.isChecked){
+                if (!telePhoneBook.isChecked) {
                     list.add(telePhoneBook.id)
-                    Log.d("CHECK","Add id = $telePhoneBook.id")
-                } else{
+                    Log.d("CHECK", "Add id = $telePhoneBook.id")
+                } else {
                     list.remove(telePhoneBook.id)
-                    Log.d("CHECK","Remove id = $telePhoneBook.id")
+                    Log.d("CHECK", "Remove id = $telePhoneBook.id")
                 }
 
                 viewModel.check(telePhoneBook.id)
@@ -66,21 +85,36 @@ class FeedFragment : Fragment() {
             if (telePhoneBook.id == 0) {
                 return@observe
             }
-            val list = arrayListOf<String>(telePhoneBook.name,telePhoneBook.surName,telePhoneBook.number)
-            bundle.putStringArrayList("parametrs",list)
-            findNavController().navigate(R.id.action_feedFragment_to_changePostFragment,
-               bundle)
+            val listBundle =
+                arrayListOf<String>(
+                    telePhoneBook.id.toString(),
+                    telePhoneBook.name,
+                    telePhoneBook.surName,
+                    telePhoneBook.number
+                )
+            bundle.putStringArrayList("parametrs", listBundle)
+
+            /*findNavController().navigate(R.id.action_feedFragment_to_changePostFragment,
+               bundle)*/
+            changeFragment.arguments = bundle
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.nav_container, changeFragment)
+                .addToBackStack("Feed Fragment")
+                .commit()
         }
 
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.nav_container, newFragment)
+                .addToBackStack("Feed Fragment")
+                .commit()
         }
 
 
         binding.delete.setOnClickListener {
-            for(s in list){
+            for (s in list) {
                 viewModel.removeById(s)
-                Log.d("CHECK","Delete id = $s")
+                Log.d("CHECK", "Delete id = $s")
             }
             list.clear()
         }

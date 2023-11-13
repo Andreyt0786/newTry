@@ -16,26 +16,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.findNavController
 import ru.aston.recycleview.adapter.CountryAdapter
 import ru.aston.recycleview.databinding.ActivityMainBinding
+import ru.aston.recycleview.ui.fragments.FeedFragment
 import ru.aston.recycleview.ui.theme.RecycleViewTheme
 import ru.aston.recycleview.viewModel.CountryViewModel
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        intent?.let {
-            if (it.action != Intent.ACTION_SEND) {
-                return@let
-            }
+        setContentView(R.layout.activity_main)
 
-            val text = it.getStringExtra(Intent.EXTRA_TEXT)
-            if (text?.isNotBlank() != true) {
-                return@let
-            }
-
-            intent.removeExtra(Intent.EXTRA_TEXT)
-
-
-        }
+       supportFragmentManager.beginTransaction().add(R.id.nav_container, FeedFragment()).commit()
     }
 }
 
